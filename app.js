@@ -1,15 +1,22 @@
+// app.js
+require('dotenv').config(); // Load environment variables from .env
 const express = require('express');
+const cors = require('cors'); // Import CORS middleware
 const attendanceRoutes = require('./routes/attendance');
-const app = express();
-const port = process.env.PORT || 3000;
 
-// Middleware to parse JSON bodies
+const app = express();
+
+// Middleware for parsing JSON
 app.use(express.json());
 
-// Attendance routes
+// Enable CORS for all routes
+app.use(cors());
+
+// Routes
 app.use('/attendance', attendanceRoutes);
 
-// Start the server
+// Start server
+const port = process.env.PORT || 3000;
 app.listen(port, () => {
-    console.log(`Server running on http://localhost:${port}`);
+    console.log(`Server running on port ${port}`);
 });
