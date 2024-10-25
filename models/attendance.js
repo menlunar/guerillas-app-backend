@@ -44,4 +44,16 @@ const addAttendance = async (attendanceData) => {
     }
 };
 
-module.exports = { getAttendance, addAttendance };
+// Delete attendance record
+const deleteAttendance = async (id) => {
+    try {
+        const query = `
+            DELETE FROM "Attendance" WHERE id = $1;
+        `;
+        const result = await pool.query(query, [id]); // Pass id as an array
+        return result.rowCount > 0; // Return true if a row was deleted, otherwise false
+    } catch (err) {
+        throw err;
+    }
+};
+module.exports = { getAttendance, addAttendance, deleteAttendance };
