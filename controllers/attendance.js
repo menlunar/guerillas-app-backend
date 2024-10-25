@@ -21,4 +21,20 @@ const addAttendance = async (req, res) => {
     }
 };
 
-module.exports = { getAttendance, addAttendance };
+// DELETE attendance
+const deleteAttendance = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const rowsAffected = await attendanceModel.deleteAttendance(id);
+        if (rowsAffected) {
+            res.status(200).send(`Attendance id ${id} has been successfully deleted`);
+        } else {
+            res.status(404).send('Attendance record not found');
+        }
+    } catch (err) {
+        res.status(500).send('Error deleting attendance');
+    }
+};
+
+
+module.exports = { getAttendance, addAttendance, deleteAttendance };
