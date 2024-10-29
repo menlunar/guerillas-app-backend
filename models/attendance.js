@@ -4,7 +4,8 @@ const pool = require('../config/db');
 const getAttendance = async () => {
     try {
         const result = await pool.query(`
-            SELECT training_date,
+            SELECT id,
+                   training_date,
                    name,
                    training_category,
                    membership,
